@@ -26,7 +26,7 @@ const CardTour = ({ imageFile, description, title, tags, _id, name }) => {
           position="top"
           style={{ maxWidth: "100%", height: "180px" }}
         />
-        <div className="top-left">{name}</div>
+        <div className="Ptop-left">{name}</div>
         <span className="text-start tag-card">
           {tags.map((item) => `#${item} `)}
         </span>

@@ -10,6 +10,7 @@ import Header from './components/Header';
 import {useDispatch} from "react-redux"
 import { setUser } from "./redux/features/authSlice";
 import AddEditTour from './pages/AddEditTour';
+import SingleTour from './pages/SingleTour';
 function App() {
   const dispatch = useDispatch();
   const user = JSON.parse(localStorage.getItem("profile"));
@@ -28,6 +29,8 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/addTour" element={<AddEditTour></AddEditTour>} />
           <Route path="/addTour/:id" element={<AddEditTour></AddEditTour>} />
+          <Route path="/tour/:id" element={<SingleTour></SingleTour>} />
+          
     </Routes>
     
     </div>

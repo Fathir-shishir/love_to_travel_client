@@ -15,3 +15,4 @@ export const googleSignIn = (result) => API.post("/users/googleSignIn", result);
 
 export const createTour = (tourData) => API.post("/tour", tourData);
 export const getTours = () => API.get("/tour");
+export const getTour = (id) => API.get(`/tour/${id}`);
