@@ -15,6 +15,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { getToursByUser } from "../redux/features/tourSlice";
 import { toast } from "react-toastify";
+import Spinner from "../components/Spinner";
 
 const Dashboard = () => {
   const { user } = useSelector((state) => ({ ...state.auth }));
@@ -35,9 +36,9 @@ const Dashboard = () => {
     return str;
   };
 
-  if (loading) {
-    return <h1>Loading</h1>;
-  }
+  if(loading){
+    return <Spinner></Spinner>
+   }
 
  
 
