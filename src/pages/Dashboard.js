@@ -13,9 +13,10 @@ import {
 } from "mdb-react-ui-kit";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { getToursByUser } from "../redux/features/tourSlice";
+import { deleteTour, getToursByUser } from "../redux/features/tourSlice";
 import { toast } from "react-toastify";
 import Spinner from "../components/Spinner";
+
 
 const Dashboard = () => {
   const { user } = useSelector((state) => ({ ...state.auth }));
@@ -39,6 +40,11 @@ const Dashboard = () => {
   if(loading){
     return <Spinner></Spinner>
    }
+   const handleDelete = (id) => {
+    if (window.confirm("Are you sure you want to delete this tour ?")) {
+      dispatch(deleteTour({ id, toast }));
+    }
+  };
 
  
 
@@ -92,7 +98,7 @@ const Dashboard = () => {
                           icon="trash"
                           style={{ color: "#dd4b39" }}
                           size="lg"
-                          
+                          onClick={() => handleDelete(item._id)}
                         />
                       </MDBBtn>
                       <Link to={`/editTour/${item._id}`}>
