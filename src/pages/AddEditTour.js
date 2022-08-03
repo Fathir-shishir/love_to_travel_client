@@ -11,7 +11,7 @@ import FileBase from "react-file-base64";
 import { toast } from "react-toastify";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { createTour } from '../redux/features/tourSlice';
+import { createTour, updateTour } from '../redux/features/tourSlice';
 
 
 const initialState = {
@@ -22,44 +22,54 @@ const initialState = {
 
 const AddEditTour = () => {
     const [tourData, setTourData] = useState(initialState);
+    const [tagErrMsg, setTagErrMsg] = useState(null);
+    const { error, loading, userTours } = useSelector((state) => ({
+      ...state.tour,
+    }));
+    const { user } = useSelector((state) => ({ ...state.auth }));
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
     const { title, description, tags } = tourData;
-    const { error, userTours } = useSelector((state) => ({
-        ...state.tour,
-      }));
-      const { user } = useSelector((state) => ({ ...state.auth }));
-      const dispatch = useDispatch();
-      const navigate = useNavigate();
+    const { id } = useParams();
+   
+    
+     
+     
+      
+      useEffect(() => {
+        if (id) {
+          const singleTour = userTours.find((tour) => tour._id === id);
+          console.log(singleTour);
+          setTourData({ ...singleTour });
+        }
+      }, [id]);
      
     
       useEffect(() => {
         error && toast.error(error);
       }, [error]);
-    const handleSubmit = (e) => {
+      const handleSubmit = (e) => {
         e.preventDefault();
-        
-        // if (!tags.length) {
-        //   setTagErrMsg("Please provide some tags");
-        // }
-        if (title && description && tags) { 
-            const updatedTourData = { ...tourData, name: user?.result?.name } 
-            dispatch(createTour({updatedTourData,navigate, toast }))
+        if (!tags.length) {
+          setTagErrMsg("Please provide some tags");
         }
-        //   const updatedTourData = { ...tourData, name: user?.result?.name };
+        if (title && description && tags) {
+          const updatedTourData = { ...tourData, name: user?.result?.name };
     
-        //   if (!id) {
-        //     dispatch(createTour({ updatedTourData, navigate, toast }));
-        //   } else {
-        //     dispatch(updateTour({ id, updatedTourData, toast, navigate }));
-        //   }
-        //   handleClear();
-        // }
+          if (!id) {
+            dispatch(createTour({ updatedTourData, navigate, toast }));
+          } else {
+            dispatch(updateTour({ id, updatedTourData, toast, navigate }));
+          }
+          handleClear();
+        }
       };
       const onInputChange = (e) => {
         const { name, value } = e.target;
         setTourData({ ...tourData, [name]: value });
       };
       const handleAddTag = (tag) => {
-        // setTagErrMsg(null);
+         setTagErrMsg(null);
         setTourData({ ...tourData, tags: [...tourData.tags, tag] });
       };
       const handleDeleteTag = (deleteTag) => {
@@ -81,7 +91,7 @@ const AddEditTour = () => {
           }}
           className="container">
              <MDBCard alignment="center">
-             <h5>Add Tour</h5>
+             <h5>{id ? "Update Tour" : "Add Tour"}</h5>
         <MDBCardBody>
           <MDBValidation onSubmit={handleSubmit} className="row g-3" noValidate>
             <div className="col-md-12">
@@ -122,7 +132,7 @@ const AddEditTour = () => {
                 onAdd={(tag) => handleAddTag(tag)}
                 onDelete={(tag) => handleDeleteTag(tag)}
               />
-             
+             {tagErrMsg && <div className="tagErrMsg">{tagErrMsg}</div>}
             </div>
             <div className="d-flex justify-content-start">
               <FileBase
@@ -135,7 +145,7 @@ const AddEditTour = () => {
             </div>
             <div className="col-12">
               <MDBBtn style={{ width: "100%" }}>
-               SUBMIT
+              {id ? "Update" : "Submit"}
               </MDBBtn>
               <MDBBtn
                 style={{ width: "100%" }}

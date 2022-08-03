@@ -13,6 +13,8 @@ import AddEditTour from './pages/AddEditTour';
 import SingleTour from './pages/SingleTour';
 import Dashboard from './pages/Dashboard';
 import PrivateRoute from './components/PrivateRoute';
+import NotFound from './pages/NotFound';
+import TagTours from './pages/TagTours';
 function App() {
   const dispatch = useDispatch();
   const user = JSON.parse(localStorage.getItem("profile"));
@@ -27,8 +29,11 @@ function App() {
     <ToastContainer></ToastContainer>
     <Routes>
     <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
+    <Route path="/tours/search" element={<Home />} />
+    <Route path="/tours/tag/:tag" element={ <TagTours></TagTours>} />
+    <Route path="/login" element={<Login />} />
+    <Route path="/register" element={<Register />} />
+    <Route path="*" element={<NotFound></NotFound>} />
           <Route path="/addTour" element={
             <PrivateRoute>
               <AddEditTour></AddEditTour>

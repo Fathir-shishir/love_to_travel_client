@@ -19,3 +19,7 @@ export const getTour = (id) => API.get(`/tour/${id}`);
 export const updateTour = (updatedTourData, id) =>
   API.patch(`/tour/${id}`, updatedTourData);
 export const getToursByUser = (userId) => API.get(`/tour/userTours/${userId}`);
+
+export const getToursBySearch = (searchQuery) =>
+  API.get(`/tour/search?searchQuery=${searchQuery}`);
+export const getTagTours = (tag) => API.get(`/tour/tag/${tag}`);
