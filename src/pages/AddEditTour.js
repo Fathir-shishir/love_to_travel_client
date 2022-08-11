@@ -88,10 +88,11 @@ const AddEditTour = () => {
             maxWidth: "450px",
             alignContent: "center",
             marginTop: "120px",
+            
           }}
           className="container">
-             <MDBCard alignment="center">
-             <h5>{id ? "Update Tour" : "Add Tour"}</h5>
+             <MDBCard alignment="center" >
+             <h5 className='mt-2'>{id ? "Update Tour" : "Add Tour"}</h5>
         <MDBCardBody>
           <MDBValidation onSubmit={handleSubmit} className="row g-3" noValidate>
             <div className="col-md-12">

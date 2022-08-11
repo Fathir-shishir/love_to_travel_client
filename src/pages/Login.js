@@ -15,7 +15,8 @@ import {
   import { googleSignIn, login } from "../redux/features/authSlice";
   import { GoogleLogin } from "react-google-login";
 
-  
+  // 696938245438-7ae3k7h55fq0ju2l5c6sv4a2ubtork8s.apps.googleusercontent.com
+
   
   const initialState = {
     email: "",
@@ -28,6 +29,11 @@ const Login = () => {
     const { email, password } = formValue;
     const dispatch = useDispatch();
     const navigate = useNavigate();
+     
+  
+
+    const clientId =  '1058221014421-iprm051uoeo8lvpumtu6cuovpm72cq82.apps.googleusercontent.com' 
+
     useEffect(() => {
       error && toast.error(error);
     }, [error]);
@@ -103,23 +109,8 @@ const Login = () => {
               </MDBBtn>
             </div>
          </MDBValidation> 
-         <br />
-          <GoogleLogin
-            clientId="305573962147-ib90fi46r6ur7juhkrh6opptrvrjn722.apps.googleusercontent.com"
-            render={(renderProps) => (
-              <MDBBtn
-                style={{ width: "100%" }}
-                color="danger"
-                onClick={renderProps.onClick}
-                disabled={renderProps.disabled}
-              >
-                <MDBIcon className="me-2" fab icon="google" /> Google Sign In
-              </MDBBtn>
-            )}
-            onSuccess={googleSuccess}
-            onFailure={googleFailure}
-            cookiePolicy="single_host_origin"
-          />
+        
+         
         </MDBCardBody>
          <MDBCardFooter>
           <Link to="/register">

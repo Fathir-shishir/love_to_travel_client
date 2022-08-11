@@ -3,7 +3,14 @@ body {
   font-family: Roboto, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  
+  background-image: linear-gradient(rgba(0, 0, 0, 0.527),rgba(0, 0, 0, 0.5)) , url(https://hasanul-banna.github.io/Root-Trekkers-BD/Images/mountains.jpg);
+  background-size: cover;
+  
 }
+
+
+
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
@@ -11,7 +18,7 @@ code {
 }
 
 .header-text {
-  color: #606080;
+  color: white;
   font-weight: 500;
   margin-top: 17px;
   font-size: 17px;
@@ -43,4 +50,42 @@ code {
   margin-top: 5px;
   text-align: left;
   font-size: 14px;
+}
+
+h4 {
+  overflow: hidden;
+  text-align: center;
+}
+
+h4:before,
+h4:after {
+  background-color: #000;
+  content: "";
+  display: inline-block;
+  height: 1px;
+  position: relative;
+  vertical-align: middle;
+  width: 50%;
+}
+
+h4:before {
+  right: 0.5em;
+  margin-left: -50%;
+}
+
+h4:after {
+  left: 0.5em;
+  margin-right: -50%;
+}
+
+.cardAnimation{
+ 
+  
+  transition: transform .2s; /* Animation */
+ 
+  
+}
+
+.cardAnimation:hover{
+  transform: scale(1.1);
 }

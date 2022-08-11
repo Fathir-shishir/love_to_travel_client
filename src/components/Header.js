@@ -14,6 +14,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { setLogout } from "../redux/features/authSlice";
 import { useNavigate } from "react-router-dom";
 import { searchTours } from "../redux/features/tourSlice";
+import decode from "jwt-decode";
 
 
 const Header = () => {
@@ -22,6 +23,14 @@ const Header = () => {
   const { user } = useSelector((state) => ({ ...state.auth }));
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const token = user?.token;
+
+  if (token) {
+    const decodedToken = decode(token);
+    if (decodedToken.exp * 1000 < new Date().getTime()) {
+      dispatch(setLogout());
+    }
+  }
   
   
   const handleSubmit = (e) => {
@@ -42,13 +51,13 @@ const Header = () => {
   };
 
   return (
-    <MDBNavbar fixed="top" expand="lg" style={{ backgroundColor: "#f0e6ea" }}>
+    <MDBNavbar expand="lg" style={{ backgroundColor: "transparent" }}>
       <MDBContainer>
         <MDBNavbarBrand
           href="/"
           style={{ color: "#606080", fontWeight: "600", fontSize: "22px" }}
         >
-         Love || TO || Travel
+         <img style={{width:"75px"}} src="https://hasanul-banna.github.io/Root-Trekkers-BD/logo.png" alt="" />
         </MDBNavbarBrand>
         <MDBNavbarToggler
           type="button"
